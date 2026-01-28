@@ -25,7 +25,10 @@ class BankAccountTest {
     @Test
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
-        assertFalse( BankAccount.isEmailValid(""));         // empty string
+        assertFalse(BankAccount.isEmailValid(""));         // empty string
+        assertFalse(BankAccount.isEmailValid("a-@mail.com"));   // dash before @
+        assertFalse(BankAccount.isEmailValid("ab@g#mail.com")); // invalid character #
+        assertFalse(BankAccount.isEmailValid("a@b.c"));        // no dots in domain
 
         
     }
