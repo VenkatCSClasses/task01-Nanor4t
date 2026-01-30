@@ -27,12 +27,12 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
-        assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
-        assertFalse(BankAccount.isEmailValid(""));         // empty string
-        assertFalse(BankAccount.isEmailValid("a-@mail.com"));   // dash before @
-        assertFalse(BankAccount.isEmailValid("ab@g#mail.com")); // invalid character #
-        assertFalse(BankAccount.isEmailValid("a@b.c"));        // no dots in domain
-
+        assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address (Equivalence class: valid email)
+        assertFalse(BankAccount.isEmailValid(""));         // empty string (Equivalence class: empty string)
+        assertFalse(BankAccount.isEmailValid("a-@mail.com"));   // dash before @ (Equivalence class: character placement)
+        assertFalse(BankAccount.isEmailValid("ab@g#mail.com")); // invalid character # (Equivalence class: invalid characters)
+        assertFalse(BankAccount.isEmailValid("a@b.c"));        // no dots in domain (Equivalence class: domain format) This is a border case as some domains have only two letters
+// Another border case we could have is that there is null input
         
     }
 
