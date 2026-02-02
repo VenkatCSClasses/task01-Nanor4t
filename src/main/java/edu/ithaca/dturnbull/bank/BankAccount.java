@@ -30,12 +30,28 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
-            balance -= amount;
+        // Validate amount
+        if (Double.isNaN(amount)){
+            throw new IllegalArgumentException("Amount is not a number");
         }
-        else {
+        if (amount < 0){
+            throw new IllegalArgumentException("Amount must be non-negative");
+        }
+
+        // Define a minimum meaningful withdrawal (e.g., 1 cent)
+        final double MIN_WITHDRAW = 0.01;
+        if (amount > 0 && amount < MIN_WITHDRAW){
+            throw new IllegalArgumentException("Amount is too small");
+        }
+
+        // Check funds (use a small epsilon to avoid floating point issues)
+        final double EPS = 1e-9;
+        if (amount - balance > EPS){
             throw new InsufficientFundsException("Not enough money");
         }
+
+        // perform withdrawal
+        balance -= amount;
     }
 
 
